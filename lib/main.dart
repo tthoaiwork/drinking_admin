@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hovering/hovering.dart';
@@ -62,25 +63,111 @@ class _DashboardScreenState extends State<DashboardScreen> {
           color: const Color(0xFFF5F7FD),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              child: Column(
-                children: [
-                  _header(),
-                  const Gap(10),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: questions.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final item = questions[index];
-                        return _item(item, index);
-                      },
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.black)),
+                                child: const Row(
+                                  children: [
+                                    Icon(Icons.search),
+                                    Expanded(
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: 'Tìm kiếm câu hỏi',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    'Thêm câu hỏi',
+                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      _header(),
+                      const Gap(10),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: questions.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final item = questions[index];
+                            return _item(item, index);
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                DropdownButtonHideUnderline(
+                  child: DropdownButton2<String>(
+                    isExpanded: true,
+                    hint: Text(
+                      'Select Item',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).hintColor,
+                      ),
                     ),
-                  )
-                ],
-              ),
+                    items: items
+                        .map((String item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    value: selectedValue,
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedValue = value;
+                      });
+                    },
+                    buttonStyleData: const ButtonStyleData(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      height: 40,
+                      width: 140,
+                    ),
+                    menuItemStyleData: const MenuItemStyleData(
+                      height: 40,
+                    ),
+                  ),
+                ),
+              ],
             ),
           )),
     );
@@ -235,3 +322,11 @@ class _HoverableItemState extends State<HoverableItem> {
     );
   }
 }
+
+final List<String> items = [
+  'Item1',
+  'Item2',
+  'Item3',
+  'Item4',
+];
+String? selectedValue;
