@@ -59,7 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       body: Container(
           width: MediaQuery.sizeOf(context).width,
-          color: Colors.grey[50],
+          color: const Color(0xFFF5F7FD),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
             child: Container(
@@ -75,7 +75,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
-                        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.34), spreadRadius: 1, blurRadius: 1)]),
+                        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 4, blurRadius: 10)]),
                   ),
                   const Gap(20),
                   Expanded(
@@ -178,15 +178,14 @@ class _HoverableItemState extends State<HoverableItem> {
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
-        // transform: isHovered ? Matrix4.translationValues(0, -0.3, 0) : Matrix4.identity(),
+        transform: isHovered ? Matrix4.translationValues(-2, 0, 0) : Matrix4.identity(),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Colors.green),
-          boxShadow: isHovered ? [BoxShadow(color: Colors.grey.withOpacity(0.34), spreadRadius: 1, blurRadius: 1)] : [],
+          boxShadow: isHovered ? [BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 4, blurRadius: 10)] : [],
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
