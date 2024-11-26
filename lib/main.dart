@@ -69,15 +69,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 children: [
                   _header(),
                   const Gap(10),
-                  Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 4, blurRadius: 10)]),
-                  ),
-                  const Gap(20),
                   Expanded(
                     child: ListView.builder(
                       itemCount: questions.length,
@@ -185,7 +176,7 @@ class _HoverableItemState extends State<HoverableItem> {
         transform: isHovered ? Matrix4.translationValues(-2, 0, 0) : Matrix4.identity(),
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: isHovered ? [BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 4, blurRadius: 10)] : [],
+          boxShadow: isHovered ? [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 2, blurRadius: 3)] : [],
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
